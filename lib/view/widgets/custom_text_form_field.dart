@@ -9,7 +9,8 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
 
 
-  CustomTextFormField({
+  const CustomTextFormField({
+    super.key,
     required this.text,
     required this.hint,
      this.onSave ,
@@ -18,21 +19,19 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      child: Column(
-        children: [
-          CustomText(text: "Email",fontSize: 14,color: Colors.grey.shade900,),
-          TextFormField(
-            onSaved: onSave,
-            validator: validator,
-            decoration: InputDecoration(
-                hintText: 'gen_eslam2002@gmail.com',
-                hintStyle: TextStyle(color: Colors.black),
-                fillColor: Colors.white
-            ),
+    return  Column(
+      children: [
+        CustomText(text: text,fontSize: 14,color: Colors.grey.shade900,),
+        TextFormField(
+          onSaved: onSave,
+          validator: validator,
+          decoration: InputDecoration(
+              hintText: hint,
+              hintStyle:const TextStyle(color: Colors.black),
+              fillColor: Colors.white
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
