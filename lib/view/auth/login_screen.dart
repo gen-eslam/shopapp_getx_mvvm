@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button.dart';
+import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button_social.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_text.dart';
 
 import '../../core/utils/constance.dart';
@@ -74,12 +75,25 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const CustomText(text: '--OR--', alignment: Alignment.center,color: Colors.grey,),
-            TextButton(onPressed: (){}, child: Row(
-              children: [
-
-              ],
-            )),
+            const CustomText(
+              text: '--OR--',
+              alignment: Alignment.center,
+              color: Colors.grey,
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            CustomButtonSocial(
+                imagePath: "assets/images/facebook.png",
+                text: 'Sign In with Facebook',
+                onPressed: () {}),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomButtonSocial(
+                imagePath: "assets/images/google.png",
+                text: 'Sign In with Google',
+                onPressed: () {}),
           ],
         ),
       ),

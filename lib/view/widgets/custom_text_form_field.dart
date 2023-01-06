@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_mvvm_getx_besia/core/utils/constance.dart';
 
 import 'custom_text.dart';
 
@@ -25,10 +26,16 @@ class CustomTextFormField extends StatelessWidget {
         TextFormField(
           onSaved: onSave,
           validator: validator,
+          cursorColor: primaryColor,
+
           decoration: InputDecoration(
               hintText: hint,
-              hintStyle:const TextStyle(color: Colors.black),
-              fillColor: Colors.white
+              hintStyle: TextStyle(color: Colors.black.withOpacity(0.4)),
+              fillColor: Colors.white,
+              focusedBorder:const UnderlineInputBorder(
+                borderSide: BorderSide(color: primaryColor),
+              ),
+
           ),
         ),
       ],
