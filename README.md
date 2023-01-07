@@ -1,4 +1,4 @@
-# shop_app_mvvm_getx_besia
+# shop_app_mvvm_getx_pesa
 
 A new Flutter project.
 project course >>https://www.youtube.com/watch?v=k2mPL-rdLNs&list=PLV1fXIAyjeuZ2pOUkmHwzMJCJgCedrQJW&index=3
