@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shop_app_mvvm_getx_besia/core/view_model/auth_view_model.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button_social.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_text.dart';
@@ -6,7 +8,7 @@ import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_text.dart';
 import '../../core/utils/constance.dart';
 import '../widgets/custom_text_form_field.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends GetWidget<AuthViewModel> {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
@@ -93,7 +95,10 @@ class LoginScreen extends StatelessWidget {
             CustomButtonSocial(
                 imagePath: "assets/images/google.png",
                 text: 'Sign In with Google',
-                onPressed: () {}),
+                onPressed: () {
+                  print("error");
+                  //controller.googleSignInMethod();
+                }),
           ],
         ),
       ),

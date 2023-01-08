@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "298852377547",
+    "firebase_url": "https://shop-app-getx-55fd8-default-rtdb.firebaseio.com",
+    "project_id": "shop-app-getx-55fd8",
+    "storage_bucket": "shop-app-getx-55fd8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298852377547:android:9616e85f8166e794ea4c4e",
+        "android_client_info": {
+          "package_name": "com.example.shop_app_mvvm_getx_besia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298852377547-99uggm05bok3k6rk0igsjlnat69ui841.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ-a7vGAqE3dGvYEyChO3fstaOUGIgwyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298852377547-99uggm05bok3k6rk0igsjlnat69ui841.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
