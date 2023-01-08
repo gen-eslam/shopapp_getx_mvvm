@@ -4,15 +4,13 @@ import 'package:shop_app_mvvm_getx_besia/core/view_model/auth_view_model.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button_social.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_text.dart';
-
 import '../../core/utils/constance.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class LoginScreen extends GetWidget<AuthViewModel> {
-  const LoginScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -88,7 +86,9 @@ class LoginScreen extends GetWidget<AuthViewModel> {
             CustomButtonSocial(
                 imagePath: "assets/images/facebook.png",
                 text: 'Sign In with Facebook',
-                onPressed: () {}),
+                onPressed: () {
+
+                }),
             const SizedBox(
               height: 20,
             ),
@@ -96,8 +96,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                 imagePath: "assets/images/google.png",
                 text: 'Sign In with Google',
                 onPressed: () {
-                  print("error");
-                  //controller.googleSignInMethod();
+                  controller.googleSignInMethod();
                 }),
           ],
         ),

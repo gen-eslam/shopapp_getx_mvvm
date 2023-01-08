@@ -4,7 +4,7 @@ import '../../core/utils/constance.dart';
 import 'custom_text.dart';
 
 class CustomButton extends StatelessWidget {
-  final Function onPress;
+  final Function()? onPress;
   final String text;
   final Color textColor;
   final Alignment textAlignment;
@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onPress(),
+      onPressed: onPress,
       style: ButtonStyle(
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(

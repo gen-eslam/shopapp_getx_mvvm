@@ -28,7 +28,6 @@ class AuthViewModel extends GetxController {
   }
 ///google signIn
   void googleSignInMethod() async {
-    /// TODO FIX ERROR LAZYPUT
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
         await googleUser!.authentication;
@@ -38,4 +37,5 @@ class AuthViewModel extends GetxController {
     );
     await _firebaseAuth.signInWithCredential(credential);
   }
+
 }

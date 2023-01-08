@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app_mvvm_getx_besia/core/utils/constance.dart';
 
 import 'custom_text.dart';
 
 class CustomButtonSocial extends StatelessWidget {
   final String imagePath;
   final String text;
-  final Function onPressed ;
+  final Function()? onPressed ;
 
   const CustomButtonSocial({
     super.key,
@@ -18,7 +17,7 @@ class CustomButtonSocial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: onPressed(),
+      onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.all(15),
         side: BorderSide(width: 1.0, color: Colors.grey.shade300),

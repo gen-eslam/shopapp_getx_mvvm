@@ -7,6 +7,7 @@ import 'core/utils/binding.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
  await Firebase.initializeApp();
   runApp( MyApp());
 }
@@ -17,9 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       initialBinding: Binding(),
-      home:  Scaffold(
-        body: LoginScreen(),
-      )
+      home:LoginScreen()
     );
   }
 }
