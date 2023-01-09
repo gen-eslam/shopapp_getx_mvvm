@@ -5,13 +5,9 @@ project course >>https://www.youtube.com/watch?v=k2mPL-rdLNs&list=PLV1fXIAyjeuZ2
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+##google auth
+ 1 - enable google auth  >>>https://console.firebase.google.com/project/shop-app-getx-55fd8/authentication/providers 
+ 2- enable api >>> https://console.cloud.google.com/apis/library/people.googleapis.com?project=shop-app-getx-55fd8
+ 3- gen sha1 >>> https://developers.google.com/android/guides/client-auth   >> default pass "android" 
+ 4- add sha1 to your project settings
+ 
