@@ -6,6 +6,7 @@ import 'package:shop_app_mvvm_getx_besia/core/utils/constance.dart';
 
 class AuthViewModel extends GetxController {
   late String email, password, name;
+  bool hidePass = true;
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
@@ -40,5 +41,24 @@ class AuthViewModel extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
+  }
+
+  /// show password methods
+  void showHidePassword() {
+    hidePass = !hidePass;
+    update();
+  }
+
+  IconData passwordIcon() {
+    return hidePass ? Icons.remove_red_eye : Icons.visibility_off;
+  }
+  ///TODO Validate Email RGX
+  void showErrorMessage(String? value) {
+
+    Get.snackbar("Empty parameter", "this field required ",
+        colorText: Colors.white,
+        backgroundColor: Colors.red,
+        snackPosition: SnackPosition.BOTTOM,
+        padding: const EdgeInsets.all(30));
   }
 }
