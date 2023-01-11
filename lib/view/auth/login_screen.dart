@@ -5,10 +5,10 @@ import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button_social.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_text.dart';
 import '../../core/utils/constance.dart';
+import '../widgets/custom_text_button.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class LoginScreen extends GetWidget<AuthViewModel> {
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   LoginScreen({super.key});
@@ -36,30 +36,32 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                 left: 10,
                 right: 10,
               ),
-
-
               decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.rectangle,
                   boxShadow: [
-                    BoxShadow(color: Colors.grey.withOpacity(0.2),
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
                       blurRadius: 10,
                       spreadRadius: 3,
                       offset: const Offset(0, 3),
                     ),
-                  ]
-
-              ),
+                  ]),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        CustomText(text: "Welcome", fontSize: 30),
-                        CustomText(
-                            text: "Sign Up", color: primaryColor, fontSize: 18),
+                      children:  [
+                        const CustomText(text: "Welcome", fontSize: 30),
+                        CustomTextButton(
+                            text: "Sign Up",
+                            onPressed:() {
+
+                            },
+                            textColor: primaryColor,
+                            fontSize: 18),
                       ],
                     ),
                     const SizedBox(
@@ -88,23 +90,22 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                     ),
                     GetBuilder<AuthViewModel>(builder: (logic) {
                       return CustomTextFormField(
-                          text: "Password",
-                          hint: "*********",
-                          obscureText: controller.hidePass,
-                          onSave: (value) {
-                            controller.password = value!;
-                          },
-                          validator: (value) {
-
-                          },
-                          suffixIcon: IconButton(
-                            color: primaryColor,
-                            icon: Icon(controller.passwordIcon(),),
-                            onPressed: () {
-                              controller.showHidePassword();
-                            },
+                        text: "Password",
+                        hint: "*********",
+                        obscureText: controller.hidePass,
+                        onSave: (value) {
+                          controller.password = value!;
+                        },
+                        validator: (value) {},
+                        suffixIcon: IconButton(
+                          color: primaryColor,
+                          icon: Icon(
+                            controller.passwordIcon(),
                           ),
-
+                          onPressed: () {
+                            controller.showHidePassword();
+                          },
+                        ),
                       );
                     }),
                     const SizedBox(
@@ -119,9 +120,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                       height: 20,
                     ),
                     CustomButton(
-                      onPress: () {
-
-                      },
+                      onPress: () {},
                       text: 'SIGN IN',
                     ),
                   ],

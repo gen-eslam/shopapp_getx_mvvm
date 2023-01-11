@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app_mvvm_getx_besia/core/utils/constance.dart';
 
 import 'custom_text.dart';
 
@@ -18,8 +19,10 @@ class CustomButtonSocial extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: onPressed,
+      
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.all(15),
+        foregroundColor: primaryColor,
         side: BorderSide(width: 1.0, color: Colors.grey.shade300),
 
       ),
