@@ -46,6 +46,7 @@ class CustomTextFormField extends StatelessWidget {
               borderSide: BorderSide(color: primaryColor),
             ),
             suffixIcon: suffixIcon,
+            errorStyle: const TextStyle(color: Colors.red,fontStyle: FontStyle.italic),
           ),
         ),
       ],
