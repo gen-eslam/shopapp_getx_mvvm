@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
   final double borderRadius;
   final double padding;
   final Color backgroundColor;
+  final bool inProcess;
 
   const CustomButton(
       {super.key,
@@ -22,6 +23,7 @@ class CustomButton extends StatelessWidget {
       this.fontSize = 16,
       this.borderRadius = 10,
       this.padding = 18,
+        this.inProcess =false,
       this.backgroundColor = primaryColor});
 
   @override
@@ -35,9 +37,9 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         padding: MaterialStateProperty.all(EdgeInsets.all(padding)),
-        backgroundColor: MaterialStateProperty.all(backgroundColor),
+        backgroundColor: MaterialStateProperty.all(inProcess? Colors.white:backgroundColor),
       ),
-      child: CustomText(
+      child:inProcess ?const CircularProgressIndicator(color: primaryColor,):CustomText(
         text: text,
         alignment: textAlignment,
         color: Colors.white,
@@ -46,3 +48,5 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+
+

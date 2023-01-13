@@ -119,17 +119,19 @@ class RegisterScreen extends GetWidget<AuthViewModel> {
                         height: 40,
                       ),
 
-                      CustomButton(
-                        onPress: () {
-                          _formRegisterKey.currentState!.save();
-                          if (_formRegisterKey.currentState!
-                              .validate()) {
-
-                            controller.signUpWithEmailAndPassword();
-                          }
-                        },
-                        text: 'SIGN UP',
-                      ),
+                      GetBuilder<AuthViewModel>(builder: (logic) {
+                        return CustomButton(
+                          inProcess: controller.inProcess,
+                          onPress: () {
+                            _formRegisterKey.currentState!.save();
+                            if (_formRegisterKey.currentState!
+                                .validate()) {
+                              controller.signUpWithEmailAndPassword();
+                            }
+                          },
+                          text: 'SIGN UP',
+                        );
+                      }),
                     ],
                   ),
                 ),

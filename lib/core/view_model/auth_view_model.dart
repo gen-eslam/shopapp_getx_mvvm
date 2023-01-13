@@ -11,6 +11,7 @@ class AuthViewModel extends GetxController {
   late String email, password, name;
   bool hidePass = true;
   bool isValidate = true;
+  bool inProcess =false;
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
@@ -61,21 +62,33 @@ class AuthViewModel extends GetxController {
   /// SIGN UP
   void signUpWithEmailAndPassword() async {
     try {
+      inProcess =true;
+      update();
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password,).then((user) async {
         await FireStoreUser().addUserToFireStore(
             UserModel(userId: user.user!.uid,
                 email: user.user!.email,
-                name: user.user!.displayName,
+                name: name,
                 pic: ""),);
       });
+      inProcess =false;
+      update();
       Get.offAll(HomeScreen());
-    } catch (e) {
-      print(e);
+    } catch (error) {
+      inProcess =false;
+      update();
+      Get.snackbar(
+        "Error Sign Up Account",
+        error.toString(),
+        colorText: Colors.white,
+        backgroundColor: errorColor,
+        margin: const EdgeInsets.all(30),
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
-  ///SAVE User Data
 
   /// show password methods
   void showHidePassword() {
