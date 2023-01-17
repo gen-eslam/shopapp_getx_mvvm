@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_app_mvvm_getx_besia/core/services/firestore_user.dart';
 import 'package:shop_app_mvvm_getx_besia/core/utils/constance.dart';
 import 'package:shop_app_mvvm_getx_besia/model/user_model.dart';
+import 'package:shop_app_mvvm_getx_besia/view/auth/login_screen.dart';
 import 'package:shop_app_mvvm_getx_besia/view/home_screen.dart';
 
 class AuthViewModel extends GetxController {
@@ -36,6 +37,9 @@ class AuthViewModel extends GetxController {
   ///Sign In With Email And Pass
   void signInWithEmailAndPassword() async {
     try {
+
+      inProcess =true;
+      update();
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       Get.snackbar(
@@ -46,8 +50,14 @@ class AuthViewModel extends GetxController {
         margin: const EdgeInsets.all(30),
         snackPosition: SnackPosition.BOTTOM,
       );
+
+      inProcess =false;
+      update();
       Get.offAll(HomeScreen());
     } catch (error) {
+
+      inProcess =false;
+      update();
       Get.snackbar(
         "Error Login Account",
         error.toString(),
@@ -98,6 +108,37 @@ class AuthViewModel extends GetxController {
 
   IconData passwordIcon() {
     return hidePass ? Icons.remove_red_eye : Icons.visibility_off;
+  }
+/// forgetPass
+  void resetPassword(String email)async {
+    try{
+      inProcess =true;
+      update();
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      inProcess =false;
+      update();
+      Get.snackbar(
+        "mission success ",
+        '',
+        colorText: Colors.white,
+        backgroundColor: primaryColor,
+        margin: const EdgeInsets.all(30),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      Get.offAll(LoginScreen());
+
+    }catch(e){
+      Get.snackbar(
+        "Error Send Email Account",
+        e.toString(),
+        colorText: Colors.white,
+        backgroundColor: errorColor,
+        margin: const EdgeInsets.all(30),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+
+    }
+
   }
 
 

@@ -6,16 +6,18 @@ import '../../core/utils/constance.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String text;
-  final Color? textColor;
-  final double? fontSize;
+  final Color textColor;
+  final double fontSize;
   final Function()? onPressed;
+  final Alignment alignment;
 
   const CustomTextButton(
       {super.key,
       required this.text,
       required this.onPressed,
-      this.textColor,
-      this.fontSize});
+      this.textColor =Colors.black,
+      this.fontSize = 14,
+      this.alignment = Alignment.bottomLeft});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,7 @@ class CustomTextButton extends StatelessWidget {
           text: text,
           color: textColor!,
           fontSize: fontSize!,
+          alignment: alignment,
         ));
   }
 }

@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool obscureText;
   final TextInputType textInputType;
+  final bool autofillHints;
   final String? Function(String?)? validator;
 
   const CustomTextFormField({
@@ -18,7 +19,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.hint,
     this.onSave,
     this.suffixIcon,
-    this.obscureText =false,
+    this.obscureText = false,
+    this.autofillHints = false,
     this.textInputType = TextInputType.text,
     this.validator,
   });
@@ -33,10 +35,19 @@ class CustomTextFormField extends StatelessWidget {
           color: Colors.grey.shade900,
         ),
         TextFormField(
+          autofillHints: autofillHints
+              ? [
+                  text.toLowerCase() == 'email'
+                      ? AutofillHints.email
+                      : text.toLowerCase() == 'password'
+                          ? AutofillHints.password
+                          : AutofillHints.name
+                ]
+              : null,
           onSaved: onSave,
           validator: validator,
           cursorColor: primaryColor,
-          obscureText:obscureText ,
+          obscureText: obscureText,
           keyboardType: textInputType,
           decoration: InputDecoration(
             hintText: hint,
@@ -46,7 +57,8 @@ class CustomTextFormField extends StatelessWidget {
               borderSide: BorderSide(color: primaryColor),
             ),
             suffixIcon: suffixIcon,
-            errorStyle: const TextStyle(color: Colors.red,fontStyle: FontStyle.italic),
+            errorStyle:
+                const TextStyle(color: Colors.red, fontStyle: FontStyle.italic),
           ),
         ),
       ],

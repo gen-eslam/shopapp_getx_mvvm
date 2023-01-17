@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mvvm_getx_besia/core/view_model/auth_view_model.dart';
+import 'package:shop_app_mvvm_getx_besia/view/auth/forget_screen.dart';
 import 'package:shop_app_mvvm_getx_besia/view/auth/register_screen.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button_social.dart';
@@ -44,7 +45,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                     shape: BoxShape.rectangle,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
+                        color: primaryColor.withOpacity(0.15),
                         blurRadius: 10,
                         spreadRadius: 3,
                         offset: const Offset(0, 3),
@@ -79,6 +80,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                         height: 30,
                       ),
                       CustomTextFormField(
+                        autofillHints: true,
                         text: "Email",
                         hint: "gen_eslam2002@gmail.com",
                         onSave: (value) {
@@ -93,6 +95,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                       ),
                       GetBuilder<AuthViewModel>(builder: (logic) {
                         return CustomTextFormField(
+                          autofillHints: true,
                           text: "Password",
                           hint: "*********",
                           obscureText: controller.hidePass,
@@ -118,25 +121,33 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const CustomText(
-                        text: "Forget Password?",
-                        fontSize: 14,
-                        alignment: Alignment.topRight,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          CustomTextButton(
+                            text: "Forget Password?",
+                            fontSize: 14,
+                            onPressed: () {
+                              Get.to(ForgetScreen());
+                            },
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 20,
                       ),
-                      CustomButton(
-                        onPress: () {
-                          _formLogInKey.currentState!.save();
-                          if (_formLogInKey.currentState!
-                              .validate()) {
-                            controller.signInWithEmailAndPassword();
-
-                          }
-                        },
-                        text: 'SIGN IN',
-                      ),
+                      GetBuilder<AuthViewModel>(builder: (logic) {
+                        return CustomButton(
+                          inProcess: controller.inProcess,
+                          onPress: () {
+                            _formLogInKey.currentState!.save();
+                            if (_formLogInKey.currentState!.validate()) {
+                              controller.signInWithEmailAndPassword();
+                            }
+                          },
+                          text: 'SIGN IN',
+                        );
+                      }),
                     ],
                   ),
                 ),
