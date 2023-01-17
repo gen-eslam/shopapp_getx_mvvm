@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mvvm_getx_besia/core/view_model/auth_view_model.dart';
-import 'package:shop_app_mvvm_getx_besia/view/auth/login_screen.dart';
+import 'package:shop_app_mvvm_getx_besia/view/auth/login_view.dart';
 
 import '../../core/utils/constance.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text.dart';
 import '../widgets/custom_text_form_field.dart';
 
-class ForgetScreen extends GetWidget<AuthViewModel> {
+class RegisterView extends GetWidget<AuthViewModel> {
   final GlobalKey<FormState> _formRegisterKey = GlobalKey<FormState>();
 
-  ForgetScreen({super.key});
+  RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ForgetScreen extends GetWidget<AuthViewModel> {
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
-            Get.off(LoginScreen());
+            Get.off(LoginView());
           },
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -62,17 +62,23 @@ class ForgetScreen extends GetWidget<AuthViewModel> {
                   key: _formRegisterKey,
                   child: Column(
                     children: [
-                      const CustomText(
-                        text: "Forget Password",
-                        fontSize: 25,
-                        alignment: Alignment.center,
+                      const CustomText(text: "Sign Up", fontSize: 30),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      CustomTextFormField(
+                        autofillHints: true,
+                        text: "Name",
+                        hint: "gen-islam",
+                        onSave: (value) {
+                          controller.name = value!;
+                        },
+                        validator: (value) {
+                          return value!.isEmpty ? "Name must be filled" : null;
+                        },
                       ),
                       SizedBox(
-                        height: 20,
-                      ),
-                      Image.asset(
-                        "assets/images/forgetpass.png",
-                        width: 250,
+                        height: 40,
                       ),
                       CustomTextFormField(
                         autofillHints: true,
@@ -89,15 +95,43 @@ class ForgetScreen extends GetWidget<AuthViewModel> {
                         height: 40,
                       ),
                       GetBuilder<AuthViewModel>(builder: (logic) {
+                        return CustomTextFormField(
+                          autofillHints: true,
+                          text: "Password",
+                          hint: "*********",
+                          obscureText: controller.hidePass,
+                          onSave: (value) {
+                            controller.password = value!;
+                          },
+                          validator: (value) {
+                            return value!.isEmpty
+                                ? "Password must be filled"
+                                : null;
+                          },
+                          suffixIcon: IconButton(
+                            color: primaryColor,
+                            icon: Icon(
+                              controller.passwordIcon(),
+                            ),
+                            onPressed: () {
+                              controller.showHidePassword();
+                            },
+                          ),
+                        );
+                      }),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      GetBuilder<AuthViewModel>(builder: (logic) {
                         return CustomButton(
                           inProcess: controller.inProcess,
                           onPress: () {
                             _formRegisterKey.currentState!.save();
                             if (_formRegisterKey.currentState!.validate()) {
-                              controller.resetPassword(controller.email);
+                              controller.signUpWithEmailAndPassword();
                             }
                           },
-                          text: 'Send Email',
+                          text: 'SIGN UP',
                         );
                       }),
                     ],

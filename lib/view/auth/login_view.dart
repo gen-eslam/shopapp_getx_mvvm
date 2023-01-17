@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shop_app_mvvm_getx_besia/core/view_model/auth_view_model.dart';
-import 'package:shop_app_mvvm_getx_besia/view/auth/forget_screen.dart';
-import 'package:shop_app_mvvm_getx_besia/view/auth/register_screen.dart';
+import 'package:shop_app_mvvm_getx_besia/view/auth/forget_view.dart';
+import 'package:shop_app_mvvm_getx_besia/view/auth/register_view.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button_social.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_text.dart';
@@ -10,10 +10,10 @@ import '../../core/utils/constance.dart';
 import '../widgets/custom_text_button.dart';
 import '../widgets/custom_text_form_field.dart';
 
-class LoginScreen extends GetWidget<AuthViewModel> {
+class LoginView extends GetWidget<AuthViewModel> {
   final GlobalKey<FormState> _formLogInKey = GlobalKey<FormState>();
 
-  LoginScreen({super.key});
+  LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                           CustomTextButton(
                               text: "Sign Up",
                               onPressed: () {
-                                Get.to(RegisterScreen());
+                                Get.to(RegisterView());
                               },
                               textColor: primaryColor,
                               fontSize: 18),
@@ -128,7 +128,7 @@ class LoginScreen extends GetWidget<AuthViewModel> {
                             text: "Forget Password?",
                             fontSize: 14,
                             onPressed: () {
-                              Get.to(ForgetScreen());
+                              Get.to(ForgetView());
                             },
                           ),
                         ],

@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shop_app_mvvm_getx_besia/view/auth/login_screen.dart';
+import 'package:shop_app_mvvm_getx_besia/view/auth/login_view.dart';
 
 import 'core/utils/binding.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: Binding(),
-      home: LoginScreen(),
+      home: LoginView(),
     );
   }
 }

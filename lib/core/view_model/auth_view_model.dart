@@ -5,8 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_app_mvvm_getx_besia/core/services/firestore_user.dart';
 import 'package:shop_app_mvvm_getx_besia/core/utils/constance.dart';
 import 'package:shop_app_mvvm_getx_besia/model/user_model.dart';
-import 'package:shop_app_mvvm_getx_besia/view/auth/login_screen.dart';
-import 'package:shop_app_mvvm_getx_besia/view/home_screen.dart';
+import 'package:shop_app_mvvm_getx_besia/view/auth/login_view.dart';
+import 'package:shop_app_mvvm_getx_besia/view/home_view.dart';
 
 class AuthViewModel extends GetxController {
   late String email, password, name;
@@ -31,7 +31,7 @@ class AuthViewModel extends GetxController {
       accessToken: googleSignInAuthentication.accessToken,
     );
     await _firebaseAuth.signInWithCredential(credential);
-    Get.offAll(HomeScreen());
+    Get.offAll(HomeView());
   }
 
   ///Sign In With Email And Pass
@@ -53,7 +53,7 @@ class AuthViewModel extends GetxController {
 
       inProcess =false;
       update();
-      Get.offAll(HomeScreen());
+      Get.offAll(HomeView());
     } catch (error) {
 
       inProcess =false;
@@ -84,7 +84,7 @@ class AuthViewModel extends GetxController {
       });
       inProcess =false;
       update();
-      Get.offAll(HomeScreen());
+      Get.offAll(HomeView());
     } catch (error) {
       inProcess =false;
       update();
@@ -125,7 +125,7 @@ class AuthViewModel extends GetxController {
         margin: const EdgeInsets.all(30),
         snackPosition: SnackPosition.BOTTOM,
       );
-      Get.offAll(LoginScreen());
+      Get.offAll(LoginView());
 
     }catch(e){
       Get.snackbar(
