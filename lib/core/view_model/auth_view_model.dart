@@ -6,13 +6,15 @@ import 'package:shop_app_mvvm_getx_besia/core/services/firestore_user.dart';
 import 'package:shop_app_mvvm_getx_besia/core/utils/constance.dart';
 import 'package:shop_app_mvvm_getx_besia/model/user_model.dart';
 import 'package:shop_app_mvvm_getx_besia/view/auth/login_view.dart';
-import 'package:shop_app_mvvm_getx_besia/view/home_view.dart';
+import '../../view/home_view.dart';
+import '../services/local_data.dart';
 
 class AuthViewModel extends GetxController {
   late String email, password, name;
   bool hidePass = true;
   bool isValidate = true;
-  bool inProcess =false;
+  bool inProcess = false;
+  UserModel? userModel;
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
@@ -21,27 +23,43 @@ class AuthViewModel extends GetxController {
   );
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  bool isLoggedIn() {
+    bool isLogged = false;
+    _firebaseAuth.idTokenChanges().listen((user) {
+      if (user == null) {
+        isLogged = false;
+      } else {
+        isLogged = true;
+      }
+    });
+    return isLogged;
+  }
   ///google signIn
   void googleSignInMethod() async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
-    await googleUser!.authentication;
+        await googleUser!.authentication;
     final AuthCredential credential = GoogleAuthProvider.credential(
       idToken: googleSignInAuthentication.idToken,
       accessToken: googleSignInAuthentication.accessToken,
     );
-    await _firebaseAuth.signInWithCredential(credential);
-    Get.offAll(HomeView());
+    await _firebaseAuth.signInWithCredential(credential).then((user) {
+      saveUser(user);
+      Get.offAll(HomeView());
+    });
   }
 
   ///Sign In With Email And Pass
   void signInWithEmailAndPassword() async {
     try {
-
-      inProcess =true;
+      inProcess = true;
       update();
       await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+          email: email, password: password).then((value) {
+        LocalData().saveString(idToken,value.user!.uid);
+
+      });
+
       Get.snackbar(
         "Sign In Success",
         "Enjoy",
@@ -50,13 +68,12 @@ class AuthViewModel extends GetxController {
         margin: const EdgeInsets.all(30),
         snackPosition: SnackPosition.BOTTOM,
       );
-
-      inProcess =false;
+      inProcess = false;
       update();
       Get.offAll(HomeView());
+      Get.delete<AuthViewModel>();
     } catch (error) {
-
-      inProcess =false;
+      inProcess = false;
       update();
       Get.snackbar(
         "Error Login Account",
@@ -72,21 +89,21 @@ class AuthViewModel extends GetxController {
   /// SIGN UP
   void signUpWithEmailAndPassword() async {
     try {
-      inProcess =true;
+      inProcess = true;
       update();
-      await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password,).then((user) async {
-        await FireStoreUser().addUserToFireStore(
-            UserModel(userId: user.user!.uid,
-                email: user.user!.email,
-                name: name,
-                pic: ""),);
+      await _firebaseAuth
+          .createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      )
+          .then((user) {
+        saveUser(user);
       });
-      inProcess =false;
+      inProcess = false;
       update();
       Get.offAll(HomeView());
     } catch (error) {
-      inProcess =false;
+      inProcess = false;
       update();
       Get.snackbar(
         "Error Sign Up Account",
@@ -99,7 +116,6 @@ class AuthViewModel extends GetxController {
     }
   }
 
-
   /// show password methods
   void showHidePassword() {
     hidePass = !hidePass;
@@ -109,13 +125,14 @@ class AuthViewModel extends GetxController {
   IconData passwordIcon() {
     return hidePass ? Icons.remove_red_eye : Icons.visibility_off;
   }
-/// forgetPass
-  void resetPassword(String email)async {
-    try{
-      inProcess =true;
+
+  /// forgetPass
+  void resetPassword(String email) async {
+    try {
+      inProcess = true;
       update();
       await _firebaseAuth.sendPasswordResetEmail(email: email);
-      inProcess =false;
+      inProcess = false;
       update();
       Get.snackbar(
         "mission success ",
@@ -126,8 +143,7 @@ class AuthViewModel extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
       Get.offAll(LoginView());
-
-    }catch(e){
+    } catch (e) {
       Get.snackbar(
         "Error Send Email Account",
         e.toString(),
@@ -136,10 +152,19 @@ class AuthViewModel extends GetxController {
         margin: const EdgeInsets.all(30),
         snackPosition: SnackPosition.BOTTOM,
       );
-
     }
-
   }
 
-
+  void saveUser(UserCredential user) async {
+    await FireStoreUser()
+        .addUserToFireStore(userModel = UserModel(
+            userId: user.user!.uid,
+            email: user.user!.email,
+            name: user.user!.displayName,
+            pic: ''))
+        .then((value) {
+      LocalData().saveString(idToken, userModel!.userId);
+      Get.delete<AuthViewModel>();
+    });
+  }
 }

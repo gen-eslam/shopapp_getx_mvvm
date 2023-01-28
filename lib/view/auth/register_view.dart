@@ -67,7 +67,6 @@ class RegisterView extends GetWidget<AuthViewModel> {
                         height: 40,
                       ),
                       CustomTextFormField(
-                        autofillHints: true,
                         text: "Name",
                         hint: "gen-islam",
                         onSave: (value) {
@@ -81,7 +80,6 @@ class RegisterView extends GetWidget<AuthViewModel> {
                         height: 40,
                       ),
                       CustomTextFormField(
-                        autofillHints: true,
                         text: "Email",
                         hint: "gen_eslam2002@gmail.com",
                         onSave: (value) {
@@ -96,7 +94,6 @@ class RegisterView extends GetWidget<AuthViewModel> {
                       ),
                       GetBuilder<AuthViewModel>(builder: (logic) {
                         return CustomTextFormField(
-                          autofillHints: true,
                           text: "Password",
                           hint: "*********",
                           obscureText: controller.hidePass,

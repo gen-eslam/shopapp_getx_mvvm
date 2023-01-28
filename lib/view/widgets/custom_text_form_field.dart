@@ -10,7 +10,6 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool obscureText;
   final TextInputType textInputType;
-  final bool autofillHints;
   final String? Function(String?)? validator;
 
   const CustomTextFormField({
@@ -20,7 +19,6 @@ class CustomTextFormField extends StatelessWidget {
     this.onSave,
     this.suffixIcon,
     this.obscureText = false,
-    this.autofillHints = false,
     this.textInputType = TextInputType.text,
     this.validator,
   });
@@ -35,15 +33,7 @@ class CustomTextFormField extends StatelessWidget {
           color: Colors.grey.shade900,
         ),
         TextFormField(
-          autofillHints: autofillHints
-              ? [
-                  text.toLowerCase() == 'email'
-                      ? AutofillHints.email
-                      : text.toLowerCase() == 'password'
-                          ? AutofillHints.password
-                          : AutofillHints.name
-                ]
-              : null,
+
           onSaved: onSave,
           validator: validator,
           cursorColor: primaryColor,

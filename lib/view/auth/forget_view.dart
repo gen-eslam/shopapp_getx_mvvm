@@ -75,7 +75,6 @@ class ForgetView extends GetWidget<AuthViewModel> {
                         width: 250,
                       ),
                       CustomTextFormField(
-                        autofillHints: true,
                         text: "Email",
                         hint: "gen_eslam2002@gmail.com",
                         onSave: (value) {
