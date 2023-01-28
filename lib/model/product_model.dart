@@ -1,5 +1,10 @@
+import 'dart:ui';
+
+import '../core/utils/extention.dart';
+
 class ProductModel {
-  final String name, description, sized, image, color, price;
+  final String name, description, sized, image, price;
+  final Color color ;
 
   ProductModel({
     required this.name,
@@ -14,7 +19,7 @@ class ProductModel {
       name: map['name'],
       description: map['description'],
       image: map['image'],
-      color: map['color'],
+      color:HexColor.fromHex(map['color']),
       price: map['price'],
       sized: map['sized']);
 
