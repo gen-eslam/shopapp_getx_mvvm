@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:shop_app_mvvm_getx_besia/core/utils/extention.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_text.dart';
 
@@ -15,81 +17,113 @@ class CartView extends StatelessWidget {
           children: [
             Expanded(
                 child: ListView.separated(
+              physics: const BouncingScrollPhysics(),
               padding: const EdgeInsets.symmetric(horizontal: 10),
               itemCount: 10,
               itemBuilder: (context, index) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 120,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        height: double.infinity,
-                        width: 120,
-                        child: Image.asset('assets/images/forgetpass.png'),
-                      ),
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                return Slidable(
+                  closeOnScroll: true,
+                  startActionPane:
+                      ActionPane(
+                          extentRatio: 0.3,
+                      motion: const DrawerMotion(),
                           children: [
-                            const CustomText(
-                              text: 'TOTAL',
-                              color: Colors.grey,
-                            ),
-                            CustomText(
-                              text: "ssss",
-                              color: primaryColor,
-                              fontSize: 20,
-                            ),
-                            Container(
-                              width: 95,
-                              height: 30,
-                              decoration:
-                                  BoxDecoration(color: Colors.grey.shade200),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
+                    SlidableAction(
 
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    GestureDetector(
-                                      onTap:(){} ,
-                                        child:const CustomText(
-                                      text: '+',
-                                          fontSize: 20,
-                                    ),
+                      onPressed: (context) {},
+                      backgroundColor: "#FFC107".toColor(),
+                      icon: Icons.star,
+                      foregroundColor: Colors.white,
+                    )
+                  ]),
+                  endActionPane: ActionPane(motion: const DrawerMotion(),
+                      extentRatio: 0.3,
+                      children: [
+                        SlidableAction(
 
-                                    ),
-                                    CustomText(
-                                      text: '1',
-                                    ),
-                                    GestureDetector(
-                                      onTap:(){} ,
-                                      child:const CustomText(
-                                        text: '-',
-                                        fontSize: 20,
+                          onPressed: (context) {},
+                          backgroundColor: errorColor,
+                          icon: Icons.delete,
+                          foregroundColor: Colors.white,
+                        )
+                      ]),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 140,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          height: double.infinity,
+                          width: 140,
+                          child: Image.asset(
+                            'assets/images/forgetpass.png',
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const CustomText(
+                                text: 'TOTAL',
+                                color: Colors.black87,
+                              ),
+                              CustomText(
+                                text: "ssss",
+                                color: primaryColor,
+                                fontSize: 20,
+                              ),
+                              Container(
+                                decoration:
+                                    BoxDecoration(color: Colors.grey.shade100),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: const Icon(Icons.add, size: 15),
                                       ),
-
-                                    ),
-                                  ],
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
+                                      CustomText(
+                                        text: '1',
+                                      ),
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: const Padding(
+                                          padding: EdgeInsets.only(bottom: 7),
+                                          child: Icon(
+                                            Icons.minimize,
+                                            size: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },
               separatorBuilder: (context, index) {
                 return const SizedBox(
-                  height: 16,
+                  height: 10,
                 );
               },
             )),
@@ -108,11 +142,12 @@ class CartView extends StatelessWidget {
                       const CustomText(
                         text: 'TOTAL',
                         color: Colors.grey,
+                        fontSize: 15,
                       ),
                       CustomText(
-                        text: "ssss",
+                        text: "\$4000",
                         color: primaryColor,
-                        fontSize: 20,
+                        fontSize: 25,
                       ),
                     ],
                   ),
