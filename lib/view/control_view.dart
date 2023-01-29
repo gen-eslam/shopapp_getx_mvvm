@@ -22,6 +22,7 @@ class ControlView extends GetWidget<ControlViewModel> {
 
   bottomNavigationBar() {
     return GetBuilder<ControlViewModel>(
+      init: ControlViewModel(),
         builder: (controller) {
           return BottomNavigationBar(
               elevation: 0,
