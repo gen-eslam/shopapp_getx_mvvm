@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shop_app_mvvm_getx_besia/core/utils/constance.dart';
+import 'package:shop_app_mvvm_getx_besia/core/view_model/cart_view_model.dart';
+import 'package:shop_app_mvvm_getx_besia/model/cart_product_model.dart';
 import 'package:shop_app_mvvm_getx_besia/model/product_model.dart';
 import 'package:shop_app_mvvm_getx_besia/view/control_view.dart';
 import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_button.dart';
@@ -23,7 +25,10 @@ class DetailsView extends StatelessWidget {
             alignment: AlignmentDirectional.center,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 height: 200,
                 child: Image.network(
                   model.image,
@@ -45,7 +50,7 @@ class DetailsView extends StatelessWidget {
                         backgroundColor: Colors.white,
                         child: IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.star_border,color: Colors.black,),
+                          icon: Icon(Icons.star_border, color: Colors.black,),
                         ))
                   ],
                 ),
@@ -78,7 +83,7 @@ class DetailsView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(40),
                               color: Colors.grey.shade100,
                               border:
-                                  Border.all(color: Colors.grey, width: 0.2),
+                              Border.all(color: Colors.grey, width: 0.2),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,7 +105,7 @@ class DetailsView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(40),
                               color: Colors.grey.shade100,
                               border:
-                                  Border.all(color: Colors.grey, width: 0.2),
+                              Border.all(color: Colors.grey, width: 0.2),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,11 +175,17 @@ class DetailsView extends StatelessWidget {
                 SizedBox(
                     width: 146,
                     height: 50,
-                    child: CustomButton(
-                      onPress: () {},
-                      text: 'ADD',
-                      borderRadius: 4,
-                    ))
+                    child: GetBuilder<CartViewModel>(
+                      init: CartViewModel(),
+                        builder: (controller) {
+                      return CustomButton(
+                        onPress: () {
+                          controller.addProduct(CartProductModel(name: model.name, quantity: 1, image:model.image, price: model.price));
+                        },
+                        text: 'ADD',
+                        borderRadius: 4,
+                      );
+                    }))
               ],
             ),
           ),

@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shop_app_mvvm_getx_besia/core/services/firestore_user.dart';
 import 'package:shop_app_mvvm_getx_besia/core/utils/constance.dart';
+import 'package:shop_app_mvvm_getx_besia/core/view_model/control_view_model.dart';
 import 'package:shop_app_mvvm_getx_besia/model/user_model.dart';
 import 'package:shop_app_mvvm_getx_besia/view/auth/login_view.dart';
+import 'package:shop_app_mvvm_getx_besia/view/control_view.dart';
 import '../../view/home_view.dart';
-import '../services/local_data.dart';
+import '../services/shared_preferences.dart';
+import '../utils/binding.dart';
 
 class AuthViewModel extends GetxController {
   late String email, password, name;
@@ -16,6 +19,8 @@ class AuthViewModel extends GetxController {
   bool inProcess = false;
   UserModel? userModel;
 
+
+
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
@@ -23,17 +28,8 @@ class AuthViewModel extends GetxController {
   );
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  bool isLoggedIn() {
-    bool isLogged = false;
-    _firebaseAuth.idTokenChanges().listen((user) {
-      if (user == null) {
-        isLogged = false;
-      } else {
-        isLogged = true;
-      }
-    });
-    return isLogged;
-  }
+
+
   ///google signIn
   void googleSignInMethod() async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -45,7 +41,7 @@ class AuthViewModel extends GetxController {
     );
     await _firebaseAuth.signInWithCredential(credential).then((user) {
       saveUser(user);
-      Get.offAll(HomeView());
+      Get.offAll(ControlView());
     });
   }
 
@@ -70,7 +66,7 @@ class AuthViewModel extends GetxController {
       );
       inProcess = false;
       update();
-      Get.offAll(HomeView());
+      Get.offAll(ControlView());
       Get.delete<AuthViewModel>();
     } catch (error) {
       inProcess = false;
@@ -101,7 +97,7 @@ class AuthViewModel extends GetxController {
       });
       inProcess = false;
       update();
-      Get.offAll(HomeView());
+      Get.offAll(ControlView());
     } catch (error) {
       inProcess = false;
       update();

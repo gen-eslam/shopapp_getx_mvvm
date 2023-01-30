@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:shop_app_mvvm_getx_besia/view/auth/login_view.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 
-import '../core/services/local_data.dart';
-import '../core/utils/constance.dart';
 import '../core/view_model/control_view_model.dart';
 
 class ControlView extends GetWidget<ControlViewModel> {
+  const ControlView({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return LocalData().getString(idToken) == null
-        ? LoginView()
-        : GetBuilder<ControlViewModel>(builder: (controller) {
-            return Scaffold(
-              body: controller.currentScreen,
-              bottomNavigationBar: bottomNavigationBar(),
-            );
-          });
+
+      return GetBuilder<ControlViewModel>(
+        init: ControlViewModel(),
+        builder: (controller) {
+
+      return Scaffold(
+        body: controller.currentScreen,
+        bottomNavigationBar: bottomNavigationBar(),
+      );
+    });
+
   }
 
   bottomNavigationBar() {
     return GetBuilder<ControlViewModel>(
-      init: ControlViewModel(),
+
         builder: (controller) {
           return BottomNavigationBar(
               elevation: 0,

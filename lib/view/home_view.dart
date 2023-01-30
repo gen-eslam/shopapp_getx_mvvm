@@ -9,7 +9,6 @@ import 'package:shop_app_mvvm_getx_besia/view/widgets/custom_text_button.dart';
 import 'details_view.dart';
 
 class HomeView extends GetWidget<HomeViewModel> {
-  HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

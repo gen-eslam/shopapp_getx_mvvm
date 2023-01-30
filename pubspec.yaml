@@ -44,6 +44,8 @@ dependencies:
   cloud_firestore: ^4.3.1
   get_storage: ^2.0.3
   flutter_slidable: ^2.0.0
+  sqflite: ^2.2.4+1
+  path: ^1.8.2
 
 
 dev_dependencies:
